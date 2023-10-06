@@ -3,11 +3,13 @@ import Link from "next/link";
 import MainNav from "@/components/main-nav";
 import Container from "@/components/ui/container";
 import NavbarActions from "@/components/navbar-actions";
-import getCategories from "@/actions/get-categories";
+import { Category } from "@/types";
 
-const Navbar = async () => {
-  const categories = await getCategories();
+type Props = {
+  categories: Category[];
+};
 
+const Navbar = ({ categories }: Props) => {
   return (
     <div className="border-b">
       <Container>

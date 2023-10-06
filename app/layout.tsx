@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
 import "./globals.css";
+import getCategories from "@/actions/get-categories";
 
 const font = Urbanist({ subsets: ["latin"] });
 
@@ -14,17 +15,20 @@ export const metadata = {
   description: "Store - The place for all your purchases.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const categories = await getCategories();
+  // console.log(categories, "categories");
+
   return (
     <html lang="en">
       <body className={font.className}>
         <ToastProvider />
         <ModalProvider />
-        <Navbar />
+        {categories && <Navbar categories={categories} />}
         {children}
         <Footer />
       </body>

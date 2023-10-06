@@ -23,6 +23,10 @@ const getProducts = async (query: Query): Promise<Product[]> => {
 
   const res = await fetch(url);
 
+  if (res.status !== 200) {
+    throw new Error(`There was an error with status code ${res.status}`);
+  }
+
   return res.json();
 };
 
